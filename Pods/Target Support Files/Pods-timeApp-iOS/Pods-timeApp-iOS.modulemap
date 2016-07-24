@@ -1,0 +1,6 @@
+framework module Pods_timeApp_iOS {
+  umbrella header "Pods-timeApp-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
