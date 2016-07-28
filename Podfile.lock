@@ -2,17 +2,20 @@ PODS:
   - Alamofire (3.4.1)
   - KeychainAccess (2.3.6)
   - MBProgressHUD (0.9.2)
+  - SwiftQRCode (2.0.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4.1)
   - KeychainAccess (~> 2.3.5)
   - MBProgressHUD (~> 0.9.2)
+  - SwiftQRCode
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   KeychainAccess: 7f10e2ef998ddf954a64d5d608be08677774684d
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  SwiftQRCode: 68e920781686e376d70646b90c8ad87fd6523309
 
-PODFILE CHECKSUM: 3ddf4e6e0d9c9e065d3049f94bba74df4546faa3
+PODFILE CHECKSUM: 8028e70ca364f31174a17515fa4742c2f8d4f091
 
 COCOAPODS: 1.1.0.beta.1

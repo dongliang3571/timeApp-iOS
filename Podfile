@@ -9,4 +9,5 @@ target 'timeApp-iOS' do
   pod 'Alamofire', '~> 3.4.1'
   pod 'KeychainAccess', '~> 2.3.5'
   pod 'MBProgressHUD', '~> 0.9.2'
+  pod 'SwiftQRCode'
 end

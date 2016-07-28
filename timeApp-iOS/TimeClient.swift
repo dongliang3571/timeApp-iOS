@@ -17,17 +17,19 @@ class TimeClient: NSObject {
     
     var baseURL: NSURL?
     var AccessToken: String?
-    static var sharedInstance : TimeClient {
-        struct Static {
-            static var token : dispatch_once_t = 0
-            static var instance : TimeClient? = nil
-        }
-        
-        dispatch_once(&Static.token) {
-            Static.instance = TimeClient(baseURL: NSURL(string: "http://127.0.0.1:8000/api/")!)
-        }
-        return Static.instance!
-    }
+//    static var sharedInstance : TimeClient {
+//        struct Static {
+//            static var token : dispatch_once_t = 0
+//            static var instance : TimeClient? = nil
+//        }
+//        
+//        dispatch_once(&Static.token) {
+//            Static.instance = TimeClient(baseURL: NSURL(string: "http://192.168.1.3:8000/api/")!)
+//        }
+//        return Static.instance!
+//    }
+    
+    static let sharedInstance = TimeClient(baseURL: NSURL(string: "http://192.168.1.3:8000/api/")!)
     
     init(baseURL: NSURL) {
         self.baseURL = baseURL
@@ -54,7 +56,7 @@ class TimeClient: NSObject {
             case .Success:
                 let statusCode = response.response?.statusCode
                 
-                if let json = response.result.value as? NSDictionary{
+                if let json = response.result.value as? NSDictionary {
                     
                     switch statusCode! {
                     case 200...299:
@@ -76,13 +78,12 @@ class TimeClient: NSObject {
                 }
             case .Failure(let error):
                 print("Cutom error when create service request in TimeClient in Failure case")
-                print(error.localizedDescription)
                 failure(error1: error, error2: nil)
             }
         }
     }
     
-    func CheckInAndOutAPI(path: String, parameters: [String: AnyObject]? = nil, headers: [String: String]? = nil, success: ([NSDictionary])->(), failure: ()->()) {
+    func CheckInAndOutAPI(path: String, parameters: [String: AnyObject]? = nil, headers: [String: String]? = nil, success: (NSDictionary)->(), failure: ()->()) {
         let targetURL = self.baseURL?.URLByAppendingPathComponent(path)
         let DataRequest = Alamofire.request(.POST, targetURL!, parameters: parameters, headers: headers)
         
@@ -91,7 +92,7 @@ class TimeClient: NSObject {
             case .Success:
                 let statusCode = response.response?.statusCode
                 
-                if let json = response.result.value as? [NSDictionary] {
+                if let json = response.result.value as? NSDictionary {
                     switch statusCode! {
                     case 200...299:
                         success(json)

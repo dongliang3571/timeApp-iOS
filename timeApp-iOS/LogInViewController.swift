@@ -28,6 +28,9 @@ class LogInViewController: UIViewController {
     }
     
     func UISetUp() {
+        
+        self.usernameField.text = "admin"
+        self.passwordField.text = "123"
         self.navigationController?.navigationBarHidden = true
         self.usernameField.placeholder = "Username"
         self.passwordField.placeholder = "Password"
@@ -49,7 +52,7 @@ class LogInViewController: UIViewController {
             }, failure: { (error1, error2) in
                 if let error1 = error1 {
                     print(error1)
-                    let alert = UIAlertController(title: "Error", message: "An unexpected error happened", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Error", message: "An unexpected error happened, try again later", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Try again", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                     MBProgressHUD.hideHUDForView(self.view, animated: true)
