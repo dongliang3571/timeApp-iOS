@@ -33,7 +33,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         UISetUp()
-        
+        self.logoImageView.hidden = true
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
         // as the media type parameter.
         let videoDevices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
@@ -242,10 +242,14 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                     if session.isActive! {
                         self.totalHourLabel.hidden = true
                         self.clockLabel.text = "\((session.signInTime)!)"
+                        self.viewForInfo.layer.backgroundColor = UIColor(red:0.18, green:0.73, blue:0.84, alpha:1.0).CGColor
+                        self.alertLabel.layer.backgroundColor = UIColor(red:0.18, green:0.73, blue:0.84, alpha:1.0).CGColor
                     } else {
                         self.totalHourLabel.text = "You've been in for \(NSString(format: "%.1f", session.total_minutes!/60)) hours"
                         self.totalHourLabel.hidden = false
                         self.clockLabel.text = "\((session.signOutTime)!)"
+                        self.viewForInfo.layer.backgroundColor = UIColor(red:1.00, green:0.23, blue:0.42, alpha:1.0).CGColor
+                        self.alertLabel.layer.backgroundColor = UIColor(red:1.00, green:0.23, blue:0.42, alpha:1.0).CGColor
                     }
                     if let team = session.team {
                         self.teamLabel.text = team

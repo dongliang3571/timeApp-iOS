@@ -29,7 +29,7 @@ class TimeClient: NSObject {
 //        return Static.instance!
 //    }
     
-    static let sharedInstance = TimeClient(baseURL: NSURL(string: "http://192.168.1.3:8000/api/")!)
+    static let sharedInstance = TimeClient(baseURL: NSURL(string: "https://kanic-time-app.herokuapp.com/api/")!)
     
     init(baseURL: NSURL) {
         self.baseURL = baseURL
