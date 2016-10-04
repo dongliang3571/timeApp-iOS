@@ -15,23 +15,11 @@ class TimeClient: NSObject {
     
     let keychain = Keychain(service: "com.kanic.timeApp-iOS")
     
-    var baseURL: NSURL?
+    var baseURL: URL?
     var AccessToken: String?
-//    static var sharedInstance : TimeClient {
-//        struct Static {
-//            static var token : dispatch_once_t = 0
-//            static var instance : TimeClient? = nil
-//        }
-//        
-//        dispatch_once(&Static.token) {
-//            Static.instance = TimeClient(baseURL: NSURL(string: "http://192.168.1.3:8000/api/")!)
-//        }
-//        return Static.instance!
-//    }
+    static let sharedInstance = TimeClient(baseURL: URL(string: "http://192.168.1.3:8000/api/")!)
     
-    static let sharedInstance = TimeClient(baseURL: NSURL(string: "https://kanic-time-app.herokuapp.com/api/")!)
-    
-    init(baseURL: NSURL) {
+    init(baseURL: URL) {
         self.baseURL = baseURL
     }
     
@@ -45,15 +33,15 @@ class TimeClient: NSObject {
      // - Parameter success: callback function when request succeeds
      // - Parameter failure: callback function when request fails
      */
-    func fetchToken(path: String, username: String, password: String, success: ()->(), failure: (error1: NSError?, error2: NSDictionary? )->()) {
-        let targetURL = self.baseURL?.URLByAppendingPathComponent(path)
+    func fetchToken(_ path: String, username: String, password: String, success: @escaping ()->(), failure: @escaping (_ error1: NSError?, _ error2: NSDictionary? )->()) {
+        let targetURL = self.baseURL?.appendingPathComponent(path)
         let parameters = ["username": username, "password": password]
-        let TokenRequest = Alamofire.request(.POST, targetURL!, parameters: parameters)
+        let TokenRequest = Alamofire.request(targetURL!, method: .post, parameters: parameters)
         
         // Handling response with JSON format
         TokenRequest.responseJSON { response in
             switch response.result {
-            case .Success:
+            case .success:
                 let statusCode = response.response?.statusCode
                 
                 if let json = response.result.value as? NSDictionary {
@@ -61,13 +49,13 @@ class TimeClient: NSObject {
                     switch statusCode! {
                     case 200...299:
                         self.AccessToken = json["token"] as? String
-                        print(self.AccessToken)
                         self.keychain["AccessToken"] = self.AccessToken
                         success()
+                        print("after success()")
                     case 400...499:
                         print("JSON: \(json)")
                         print("Request error")
-                        failure(error1: nil, error2: json)
+                        failure(nil, json)
                     case 500...599:
                         print("JSON: \(json)")
                         print("Server error")
@@ -76,20 +64,21 @@ class TimeClient: NSObject {
                         print("default error")
                     }
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print("Cutom error when create service request in TimeClient in Failure case")
-                failure(error1: error, error2: nil)
+                failure(error as NSError?, nil)
             }
         }
     }
     
-    func CheckInAndOutAPI(path: String, parameters: [String: AnyObject]? = nil, headers: [String: String]? = nil, success: (NSDictionary)->(), failure: ()->()) {
-        let targetURL = self.baseURL?.URLByAppendingPathComponent(path)
-        let DataRequest = Alamofire.request(.POST, targetURL!, parameters: parameters, headers: headers)
+    func CheckInAndOutAPI(_ path: String, parameters: [String: String]? = nil, headers: [String: String]? = nil, success: @escaping (NSDictionary)->(), failure: @escaping ()->()) {
+        let targetURL = self.baseURL?.appendingPathComponent(path)
+        let DataRequest = Alamofire.request(targetURL!, method: .post, parameters: parameters, headers: headers!)
+        
         
         DataRequest.responseJSON { response in
             switch response.result {
-            case .Success:
+            case .success:
                 let statusCode = response.response?.statusCode
                 
                 if let json = response.result.value as? NSDictionary {
@@ -97,19 +86,19 @@ class TimeClient: NSObject {
                     case 200...299:
                         success(json)
                     case 400...499:
-                        print("JSON: \(json)")
+                        success(json)
                         print("Request error")
                     case 500...599:
-                        print("JSON: \(json)")
+                        success(json)
                         print("Server error")
                     default:
-                        print("JSON: \(json)")
+                        success(json)
                         print("default error")
                     }
                 } else {
                     print("errors happened when trying to fetch data")
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print("Cutom error when create service request in TimeClient")
                 print(error.localizedDescription)
                 failure()

@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B4407731D41B2AD009205BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4407721D41B2AD009205BE /* ViewController.swift */; };
+		3B31059A1DA1AB3C00EC8EFD /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3105991DA1AB3C00EC8EFD /* IntroViewController.swift */; };
+		3B31059D1DA1D5DF00EC8EFD /* IntroContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31059C1DA1D5DF00EC8EFD /* IntroContainerViewController.swift */; };
+		3B31059F1DA2001500EC8EFD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31059E1DA2001500EC8EFD /* User.swift */; };
 		3B454D7F1D3F1C8500F13BF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B454D7E1D3F1C8500F13BF4 /* AppDelegate.swift */; };
 		3B454D841D3F1C8500F13BF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B454D821D3F1C8500F13BF4 /* Main.storyboard */; };
 		3B454D891D3F1C8500F13BF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B454D871D3F1C8500F13BF4 /* LaunchScreen.storyboard */; };
@@ -22,7 +24,9 @@
 /* Begin PBXFileReference section */
 		082965A789F0C4689B273555 /* Pods-timeApp-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-timeApp-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-timeApp-iOS/Pods-timeApp-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		1DF060CFC04230ABD6DE4EDC /* Pods_timeApp_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_timeApp_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4407721D41B2AD009205BE /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3B3105991DA1AB3C00EC8EFD /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		3B31059C1DA1D5DF00EC8EFD /* IntroContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroContainerViewController.swift; sourceTree = "<group>"; };
+		3B31059E1DA2001500EC8EFD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3B454D7B1D3F1C8500F13BF4 /* timeApp-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "timeApp-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B454D7E1D3F1C8500F13BF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B454D831D3F1C8500F13BF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,8 +79,9 @@
 				3B454D871D3F1C8500F13BF4 /* LaunchScreen.storyboard */,
 				3B454D8A1D3F1C8500F13BF4 /* Info.plist */,
 				3B454D901D3F1E4A00F13BF4 /* HomeViewController.swift */,
+				3B3105991DA1AB3C00EC8EFD /* IntroViewController.swift */,
+				3B31059C1DA1D5DF00EC8EFD /* IntroContainerViewController.swift */,
 				3B454D921D3FDDF900F13BF4 /* TimeClient.swift */,
-				3B4407721D41B2AD009205BE /* ViewController.swift */,
 				3B5C1FD71D442C0F002064D9 /* LogInViewController.swift */,
 				3BC6319C1D49C88B00DE5623 /* Assets.xcassets */,
 			);
@@ -87,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				3BD861CE1D47E2270003B763 /* Session.swift */,
+				3B31059E1DA2001500EC8EFD /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -144,6 +150,7 @@
 					3B454D7A1D3F1C8500F13BF4 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 872LGY9L56;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -231,10 +238,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B31059D1DA1D5DF00EC8EFD /* IntroContainerViewController.swift in Sources */,
 				3B454D7F1D3F1C8500F13BF4 /* AppDelegate.swift in Sources */,
 				3B454D931D3FDDF900F13BF4 /* TimeClient.swift in Sources */,
 				3BD861CF1D47E2270003B763 /* Session.swift in Sources */,
-				3B4407731D41B2AD009205BE /* ViewController.swift in Sources */,
+				3B31059F1DA2001500EC8EFD /* User.swift in Sources */,
+				3B31059A1DA1AB3C00EC8EFD /* IntroViewController.swift in Sources */,
 				3B5C1FD81D442C0F002064D9 /* LogInViewController.swift in Sources */,
 				3B454D911D3F1E4A00F13BF4 /* HomeViewController.swift in Sources */,
 			);
@@ -358,6 +367,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kanic.timeApp-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -375,6 +385,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kanic.timeApp-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

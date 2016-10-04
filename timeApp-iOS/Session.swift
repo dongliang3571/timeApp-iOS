@@ -15,11 +15,11 @@ class Session: NSObject {
     var _signInTime: String!
     var signInTime: String? {
         get {
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
-            let date = dateFormatter.dateFromString(_signInTime)
+            let date = dateFormatter.date(from: _signInTime)
             dateFormatter.dateFormat = "HH:mm a"
-            let dateString = dateFormatter.stringFromDate(date!)
+            let dateString = dateFormatter.string(from: date!)
             return dateString
         }
     }
@@ -28,11 +28,11 @@ class Session: NSObject {
     var _signOutTime: String!
     var signOutTime: String? {
         get {
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
-            let date = dateFormatter.dateFromString(_signOutTime)
+            let date = dateFormatter.date(from: _signOutTime)
             dateFormatter.dateFormat = "HH:mm a"
-            let dateString = dateFormatter.stringFromDate(date!)
+            let dateString = dateFormatter.string(from: date!)
             return dateString
         }
     }
@@ -51,23 +51,23 @@ class Session: NSObject {
             self._signInTime = signInTime
         }
         
-        if let signOutTime = dictionary.objectForKey("signed_out") {
+        if let signOutTime = dictionary.object(forKey: "signed_out") {
             self._signOutTime = signOutTime as! String
         }
         
-        if let team = dictionary.objectForKey("team") {
+        if let team = dictionary.object(forKey: "team") {
             self.team = team as? String
         } else {
             self.team = nil
         }
         
-        if let total_minutes = dictionary.objectForKey("total_minutes") {
+        if let total_minutes = dictionary.object(forKey: "total_minutes") {
             self.total_minutes = total_minutes as? Float
         } else {
             self.total_minutes = nil
         }
         
-        if let user = dictionary.objectForKey("user") {
+        if let user = dictionary.object(forKey: "user") {
             self.user = user as? String
         }
         

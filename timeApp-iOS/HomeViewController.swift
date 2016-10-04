@@ -13,18 +13,13 @@ import MBProgressHUD
 class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     @IBOutlet weak var viewForCamera: UIView!
-    @IBOutlet weak var viewForInfo: UIView!
-    @IBOutlet weak var alertLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var clockLabel: UILabel!
     @IBOutlet weak var totalHourLabel: UILabel!
-    @IBOutlet weak var staticMessageLabel: UILabel!
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var iPadImageView: UIImageView!
-    @IBOutlet weak var checkImageView: UIImageView!
-    @IBOutlet weak var clockImageView: UIImageView!
-    
+    @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var staticLabel: UILabel!
+    @IBOutlet weak var successImage: UIImageView!
+    @IBOutlet weak var hoursImage: UIImageView!
+    @IBOutlet weak var signInAndOutTextLabel: UILabel!
     
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
@@ -33,15 +28,15 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         UISetUp()
-        self.logoImageView.hidden = true
+//        self.logoImageView.hidden = true
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
         // as the media type parameter.
-        let videoDevices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+        let videoDevices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
         var captureDevice: AVCaptureDevice? = nil
         
-        for device in videoDevices{
+        for device in videoDevices!{
             let device = device as! AVCaptureDevice
-            if device.position == AVCaptureDevicePosition.Front {
+            if device.position == AVCaptureDevicePosition.front {
                 captureDevice = device
                 break
             }
@@ -54,22 +49,14 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         captureSession = AVCaptureSession()
         // Set the input device on the capture session.
         captureSession?.addInput(input as? AVCaptureInput)
-//        captureSession?.sessionPreset = AVCaptureSessionPreset1920x1080
         
         
         // Initialize a AVCaptureMetadataOutput object and set it as the output device to the capture session.
         let captureMetadataOutput = AVCaptureMetadataOutput()
-//        let size = self.view.bounds.size
-//        let cropRect = CGRectMake(40, 100, 240, 240)
-//        captureMetadataOutput.rectOfInterest = CGRectMake(cropRect.origin.y/size.height,
-//                                                          cropRect.origin.x/size.width,
-//                                                          cropRect.size.height/size.height,
-//                                                          cropRect.size.width/size.width)
-//        captureMetadataOutput.rectOfInterest =
         captureSession?.addOutput(captureMetadataOutput)
         
         // Set delegate and use the default dispatch queue to execute the call back
-        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
+        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         captureMetadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
         
         // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
@@ -83,21 +70,21 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         var orientation: AVCaptureVideoOrientation?
         let previewLayerConnection = self.videoPreviewLayer!.connection
         
-        if previewLayerConnection.supportsVideoOrientation {
-            switch (UIApplication.sharedApplication().statusBarOrientation)
+        if (previewLayerConnection?.isVideoOrientationSupported)! {
+            switch (UIApplication.shared.statusBarOrientation)
             {
-            case UIInterfaceOrientation.LandscapeLeft:
-                orientation = AVCaptureVideoOrientation.LandscapeLeft
-            case UIInterfaceOrientation.LandscapeRight:
-                orientation = AVCaptureVideoOrientation.LandscapeRight
-            case UIInterfaceOrientation.Unknown:
+            case UIInterfaceOrientation.landscapeLeft:
+                orientation = AVCaptureVideoOrientation.landscapeLeft
+            case UIInterfaceOrientation.landscapeRight:
+                orientation = AVCaptureVideoOrientation.landscapeRight
+            case UIInterfaceOrientation.unknown:
                 orientation = nil
             default:
-                orientation = AVCaptureVideoOrientation.LandscapeLeft
+                orientation = AVCaptureVideoOrientation.landscapeLeft
             }
             
             if let orientation = orientation {
-                previewLayerConnection.videoOrientation = orientation
+                previewLayerConnection?.videoOrientation = orientation
             }
         }
         
@@ -107,7 +94,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         
         // Initialize QR Code Frame to highlight the QR code
         qrCodeFrameView = UIView()
-        qrCodeFrameView?.layer.borderColor = UIColor.greenColor().CGColor
+        qrCodeFrameView?.layer.borderColor = UIColor.green.cgColor
         qrCodeFrameView?.layer.borderWidth = 2
         self.viewForCamera.addSubview(qrCodeFrameView!)
 //        self.viewForCamera.bringSubviewToFront(qrCodeFrameView!)
@@ -122,87 +109,101 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     // Be able to rotate the screen
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
     
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.LandscapeRight
+    override var preferredInterfaceOrientationForPresentation : UIInterfaceOrientation {
+        return UIInterfaceOrientation.landscapeRight
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return false
     }
     
     // rotate video orientation when main view rotated
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) in
-            let orientation = UIApplication.sharedApplication().statusBarOrientation
-            if orientation == UIInterfaceOrientation.LandscapeLeft {
-                self.videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.LandscapeLeft
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (context: UIViewControllerTransitionCoordinatorContext) in
+            let orientation = UIApplication.shared.statusBarOrientation
+            if orientation == UIInterfaceOrientation.landscapeLeft {
+                self.videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
             } else {
-                self.videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.LandscapeRight
+                self.videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.landscapeRight
             }
             }, completion: nil)
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     // UI set up
     func UISetUp() {
         // Set two placeholder views' attribute
-        self.viewForCamera.backgroundColor = UIColor.greenColor()
-        self.viewForInfo.layer.backgroundColor = UIColor(red:0.18, green:0.73, blue:0.84, alpha:1.0).CGColor
-        self.viewForInfo.hidden = true
-        self.viewForInfo.layer.cornerRadius = 15
+        let view_width = self.view.bounds.width
+        let view_height = self.view.bounds.height
+        let originX = CGFloat(0.0)
+        let originY = CGFloat(20.0)
+        let sizeX = view_width*4.5/10.0
+        let sizeY = view_height - originY
+        
+        self.viewForCamera.frame = CGRect(origin: CGPoint(x: originX, y: originY), size: CGSize(width: sizeX, height: sizeY))
 
         // Labels and image views
-        self.nameLabel.hidden = true
-        self.nameLabel.textColor = UIColor.whiteColor()
-        self.nameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
+        self.logOutButton.backgroundColor = UIColor(red:0.58, green:0.65, blue:0.65, alpha:1.0)
+        self.logOutButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        self.logOutButton.layer.cornerRadius = 10.0
+        self.logOutButton.addTarget(self, action: #selector(self.logoutButtonClicked), for: UIControlEvents.touchUpInside)
         
-        self.teamLabel.hidden = true
-        self.teamLabel.textColor = UIColor.whiteColor()
-        self.teamLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
+        self.staticLabel.sizeToFit()
+        let originX_staticLabel = sizeX + (view_width - sizeX)/2.0 - self.staticLabel.bounds.width/2.0
+        let originY_staticLabel = view_height/2.0
+        self.staticLabel.font = UIFont(name: "Avenir", size: 20.0)
+        self.staticLabel.text = "Please scan your QR code"
+        self.staticLabel.sizeToFit()
+        self.staticLabel.textColor = UIColor(red:0.58, green:0.65, blue:0.65, alpha:1.0)
+        self.staticLabel.frame = CGRect(origin: CGPoint(x: originX_staticLabel, y: originY_staticLabel), size: self.staticLabel.bounds.size)
         
-        self.clockLabel.hidden = true
-        self.clockLabel.textColor = UIColor.whiteColor()
+        self.successImage.bounds.size = CGSize(width: view_width*2.0/10.0, height: view_width*2.0/10.0)
+        let originX_successImage = sizeX + (view_width - sizeX)/2.0 - self.successImage.bounds.width/2.0
+        let originY_successImage = view_height/2.0 - self.successImage.bounds.height/2.0
+        self.successImage.image = UIImage(named: "Oval_check")
+        self.successImage.frame = CGRect(origin: CGPoint(x: originX_successImage, y: originY_successImage), size: self.successImage.bounds.size)
+        self.successImage.alpha = 0.0
+        
+        self.hoursImage.bounds.size = CGSize(width: view_width*2.0/10.0, height: view_width*2.0/10.0)
+        self.hoursImage.image = UIImage(named: "Oval_1")
+        let originX_hourImage = sizeX + (view_width - sizeX)/2.0
+        let originY_hourImage = view_height/2.0 - self.hoursImage.bounds.height/2.0
+        self.hoursImage.frame = CGRect(origin: CGPoint(x: originX_hourImage, y: originY_hourImage), size: self.hoursImage.bounds.size)
+        self.hoursImage.alpha = 0.0
+        
+        
+        self.totalHourLabel.alpha = 0.0
+        self.totalHourLabel.textColor = UIColor(red:0.58, green:0.65, blue:0.65, alpha:1.0)
+        self.totalHourLabel.font = UIFont(name:"Avenir", size: 20.0)
+        
+        
+        self.signInAndOutTextLabel.text = "Hi Dong Liang, you've signed in!"
+        self.signInAndOutTextLabel.sizeToFit()
+        let originX_signInAndOutTextLabel = sizeX + (view_width - sizeX)/2.0 - self.signInAndOutTextLabel.bounds.width/2.0
+        let originY_signInAndOutTextLabel = originY_successImage + self.successImage.bounds.height + 30
+        self.signInAndOutTextLabel.textColor = UIColor(red:0.58, green:0.65, blue:0.65, alpha:1.0)
+        self.signInAndOutTextLabel.frame = CGRect(origin: CGPoint(x: originX_signInAndOutTextLabel, y: originY_signInAndOutTextLabel), size: self.signInAndOutTextLabel.bounds.size)
+        self.signInAndOutTextLabel.alpha = 0.0
+        
+        self.clockLabel.text = "05:00pm"
+        self.clockLabel.sizeToFit()
         self.clockLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
-        
-        self.totalHourLabel.hidden = true
-        self.totalHourLabel.textColor = UIColor.whiteColor()
-        self.totalHourLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
-        
-        self.staticMessageLabel.backgroundColor = UIColor.whiteColor()
-        self.staticMessageLabel.textColor = UIColor(red:0.22, green:0.72, blue:0.62, alpha:1.0)
-        self.staticMessageLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-        self.staticMessageLabel.text = "Please scan your QR code"
-        
-        self.alertLabel.hidden = true
-        self.alertLabel.layer.backgroundColor = UIColor(red:0.18, green:0.73, blue:0.84, alpha:1.0).CGColor
-        self.alertLabel.layer.cornerRadius = 15
-        self.alertLabel.textColor = UIColor.whiteColor()
-        self.alertLabel.text = "Success!"
-        
-        
-        self.logoImageView.image = UIImage(named: "zahn")
-        self.iPadImageView.image = UIImage(named: "ipad")
-        self.checkImageView.image = UIImage(named: "check")
-        self.clockImageView.image = UIImage(named: "clock3")
-        self.clockImageView.image = self.clockImageView.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        self.clockImageView.tintColor = UIColor.whiteColor()
-        self.checkImageView.hidden = true
-        
-        
-//        heImageView.image = theImageView.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-//        theImageView.tintColor = UIColor.redColor()
-
+        let originX_clockLabel = sizeX + (view_width - sizeX)/2.0 - self.clockLabel.bounds.width/2.0
+        let originY_clockLabel = originY_signInAndOutTextLabel + self.clockLabel.bounds.height + 5
+        self.clockLabel.textColor = UIColor(red:0.58, green:0.65, blue:0.65, alpha:1.0)
+        self.clockLabel.frame = CGRect(origin: CGPoint(x: originX_clockLabel, y: originY_clockLabel), size: self.clockLabel.bounds.size)
+        self.clockLabel.alpha = 0.0
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
         // Check if the metadataObjects array is not nil and it contains at least one object.
         if metadataObjects == nil || metadataObjects.count == 0 {
-            qrCodeFrameView?.frame = CGRectZero
+            qrCodeFrameView?.frame = CGRect.zero
             return
         }
         
@@ -211,74 +212,130 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         
         if metadataObj.type == AVMetadataObjectTypeQRCode {
             // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
-            let barCodeObject = videoPreviewLayer?.transformedMetadataObjectForMetadataObject(metadataObj) as! AVMetadataMachineReadableCodeObject
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj) as! AVMetadataMachineReadableCodeObject
             qrCodeFrameView?.frame = barCodeObject.bounds;
             
             if metadataObj.stringValue != nil {
                 self.qrCodeFrameView?.frame = barCodeObject.bounds;
                 print(metadataObj.stringValue)
-                let hud = MBProgressHUD.showHUDAddedTo(self.viewForCamera, animated: true)
-                hud.labelText = "Processing"
+                let hud = MBProgressHUD.showAdded(to: self.viewForCamera, animated: true)
+                hud.label.text = "Processing"
                 self.captureSession?.stopRunning()
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-                    // Wait for 4 seconds so that user can see their info
-                    NSThread.sleepForTimeInterval(4)
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.captureSession?.startRunning()
-                        MBProgressHUD.hideHUDForView(self.viewForCamera, animated: true)
-                        self.qrCodeFrameView?.frame = CGRectZero
-                        self.hiddenAllComponents()
-                        self.staticMessageLabel.hidden = false
-                        self.iPadImageView.hidden = false
-                    })
-                })
+                
+                // get current time
+                let currentDate = Date()
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale.current
+                dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
+                let dateString = dateFormatter.string(from: currentDate)
                 
                 // Create a session on server
-                let parameters = ["qr_code_string": metadataObj.stringValue]
+                let parameters = ["qr_code_string": metadataObj.stringValue, "time_now": dateString]
                 let headers = ["Authorization": "JWT \(TimeClient.sharedInstance.AccessToken!)"]
-                TimeClient.sharedInstance.CheckInAndOutAPI("session-create", parameters: parameters, headers: headers, success: { (json) in
+                TimeClient.sharedInstance.CheckInAndOutAPI("session-create", parameters: parameters as? [String : String], headers: headers, success: { (json) in
                     print(json)
-                    let session = Session(dictionary: json)
-                    if session.isActive! {
-                        self.totalHourLabel.hidden = true
-                        self.clockLabel.text = "\((session.signInTime)!)"
-                        self.viewForInfo.layer.backgroundColor = UIColor(red:0.18, green:0.73, blue:0.84, alpha:1.0).CGColor
-                        self.alertLabel.layer.backgroundColor = UIColor(red:0.18, green:0.73, blue:0.84, alpha:1.0).CGColor
+                    if let _ = json["is_active"] {
+                        let session = Session(dictionary: json)
+                        if session.isActive! {
+                            self.moveImageWhenSignIn()
+                            self.signInAndOutTextLabel.text = "Hi \(session.user!), you've signed in!"
+                            self.signInAndOutTextLabel.sizeToFit()
+                            self.clockLabel.text = "\(session.signInTime!)"
+                            self.clockLabel.sizeToFit()
+                            UIView.animate(withDuration: 2.0, animations: {
+                                self.signInAndOutTextLabel.alpha = 1.0
+                                self.clockLabel.alpha = 1.0
+                                self.staticLabel.alpha = 0.0
+                                self.successImage.alpha = 1.0
+                                }, completion: { (isComplete) in
+                                    self.finishCapture()
+                                    UIView.animate(withDuration: 2.5, animations: {
+                                        self.signInAndOutTextLabel.alpha = 0.0
+                                        self.clockLabel.alpha = 0.0
+                                        self.staticLabel.alpha = 1.0
+                                        self.successImage.alpha = 0.0
+                                    })
+                            })
+                        } else {
+                            self.moveImageWhenSignOut()
+                            self.signInAndOutTextLabel.text = "Hi \(session.user!), you've signed out!"
+                            self.signInAndOutTextLabel.sizeToFit()
+                            UIView.animate(withDuration: 2.0, animations: {
+                                self.signInAndOutTextLabel.alpha = 1.0
+                                self.clockLabel.alpha = 1.0
+                                self.staticLabel.alpha = 0.0
+                                self.successImage.alpha = 1.0
+                                self.hoursImage.alpha = 1.0
+                                }, completion: { (isComplete) in
+                                    self.finishCapture()
+                                    UIView.animate(withDuration: 2.0, animations: {
+                                        self.signInAndOutTextLabel.alpha = 0.0
+                                        self.clockLabel.alpha = 0.0
+                                        self.staticLabel.alpha = 1.0
+                                        self.successImage.alpha = 0.0
+                                        self.hoursImage.alpha = 0.0
+                                    })
+                            })
+                            self.finishCapture()
+                        }
                     } else {
-                        self.totalHourLabel.text = "You've been in for \(NSString(format: "%.1f", session.total_minutes!/60)) hours"
-                        self.totalHourLabel.hidden = false
-                        self.clockLabel.text = "\((session.signOutTime)!)"
-                        self.viewForInfo.layer.backgroundColor = UIColor(red:1.00, green:0.23, blue:0.42, alpha:1.0).CGColor
-                        self.alertLabel.layer.backgroundColor = UIColor(red:1.00, green:0.23, blue:0.42, alpha:1.0).CGColor
+                        self.finishCapture()
+                        self.presentError()
                     }
-                    if let team = session.team {
-                        self.teamLabel.text = team
-                        self.teamLabel.hidden = false
-                    }
-                    self.iPadImageView.hidden = true
-                    self.staticMessageLabel.hidden = true
-                    self.checkImageView.hidden = false
-                    self.viewForInfo.hidden = false
-                    self.nameLabel.text = session.user
-                    self.nameLabel.hidden = false
-                    self.alertLabel.hidden = false
-                    self.clockLabel.hidden = false
-                    self.staticMessageLabel.hidden = true
                     }, failure: {
+                        self.finishCapture()
+                        self.presentError()
                         print("error in check in and out in HomeViewController")
                 })
             }
         }
     }
+    
+    func logoutButtonClicked() {
+        let alert = UIAlertController(title: "Sign out?", message: "Are you sure that you want to sign out?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default) { (action) in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        alert.addAction(confirmAction)
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 
-    func hiddenAllComponents() {
-        self.alertLabel.hidden = true
-        self.nameLabel.hidden = true
-        self.teamLabel.hidden = true
-        self.clockLabel.hidden = true
-        self.totalHourLabel.hidden = true
-        self.checkImageView.hidden = true
-        self.viewForInfo.hidden = true
+    private func finishCapture() {
+        MBProgressHUD.hide(for: self.viewForCamera, animated: true)
+        self.captureSession?.startRunning()
+        self.qrCodeFrameView?.frame = CGRect.zero
+    }
+    
+    private func hiddenAllComponents() {
+        self.totalHourLabel.isHidden = true
+    }
+    
+    private func moveImageWhenSignIn() {
+        let view_width = self.view.bounds.width
+        let view_height = self.view.bounds.height
+        let sizeX = view_width*4.5/10.0
+        
+        let originX_successImage = sizeX + (view_width - sizeX)/2.0 - self.successImage.bounds.width/2.0
+        let originY_successImage = view_height/2.0 - self.successImage.bounds.height/2.0
+        self.successImage.frame = CGRect(origin: CGPoint(x: originX_successImage, y: originY_successImage), size: self.successImage.bounds.size)
+    }
+    
+    private func moveImageWhenSignOut() {
+        let view_width = self.view.bounds.width
+        let view_height = self.view.bounds.height
+        let sizeX = view_width*4.5/10.0
+        
+        let originX_successImage = sizeX + (view_width - sizeX)/2.0 - self.successImage.bounds.width
+        let originY_successImage = view_height/2.0 - self.successImage.bounds.height/2.0
+        self.successImage.frame = CGRect(origin: CGPoint(x: originX_successImage, y: originY_successImage), size: self.successImage.bounds.size)
+    }
+    
+    private func presentError() {
+        let alert = UIAlertController(title: "Error", message: "An unexpected error happened, try again later", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Try again", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation
