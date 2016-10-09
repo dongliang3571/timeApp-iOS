@@ -170,19 +170,31 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         
         self.hoursImage.bounds.size = CGSize(width: view_width*2.0/10.0, height: view_width*2.0/10.0)
         self.hoursImage.image = UIImage(named: "Oval_1")
-        let originX_hourImage = sizeX + (view_width - sizeX)/2.0
+        let width_hoursImage = self.hoursImage.bounds.size.width
+        let height_hoursImage = self.hoursImage.bounds.size.height
+        let originX_hourImage = sizeX + (view_width - sizeX)/2.0 + 10
         let originY_hourImage = view_height/2.0 - self.hoursImage.bounds.height/2.0
         self.hoursImage.frame = CGRect(origin: CGPoint(x: originX_hourImage, y: originY_hourImage), size: self.hoursImage.bounds.size)
         self.hoursImage.alpha = 0.0
         
-        
+        self.totalHourLabel.text = "11Hours"
+        self.totalHourLabel.font = UIFont(name: "Avenir", size: 20.0)
+        self.totalHourLabel.sizeToFit()
+        let width_totalHourLabel = self.totalHourLabel.bounds.size.width
+        let height_totalHourLabel = self.totalHourLabel.bounds.size.height
+        let originX_totalHourLabel = originX_hourImage + width_hoursImage/2.0 - width_totalHourLabel/2.0
+        let originY_totalHourLabel = originY_hourImage + height_hoursImage/2.0 - height_totalHourLabel/4.0
+        self.totalHourLabel.frame = CGRect(origin: CGPoint(x: originX_totalHourLabel, y: originY_totalHourLabel), size: totalHourLabel.bounds.size)
         self.totalHourLabel.alpha = 0.0
         self.totalHourLabel.textColor = UIColor(red:0.58, green:0.65, blue:0.65, alpha:1.0)
         self.totalHourLabel.font = UIFont(name:"Avenir", size: 20.0)
         
-        
         self.signInAndOutTextLabel.text = "Hi Dong Liang, you've signed in!"
+        self.signInAndOutTextLabel.textAlignment = NSTextAlignment.center
+        self.signInAndOutTextLabel.numberOfLines = 2
         self.signInAndOutTextLabel.sizeToFit()
+        self.signInAndOutTextLabel.bounds.size.width = view_width/3.0
+        self.signInAndOutTextLabel.font = UIFont(name: "Avenir", size: 20.0)
         let originX_signInAndOutTextLabel = sizeX + (view_width - sizeX)/2.0 - self.signInAndOutTextLabel.bounds.width/2.0
         let originY_signInAndOutTextLabel = originY_successImage + self.successImage.bounds.height + 30
         self.signInAndOutTextLabel.textColor = UIColor(red:0.58, green:0.65, blue:0.65, alpha:1.0)
@@ -190,10 +202,10 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         self.signInAndOutTextLabel.alpha = 0.0
         
         self.clockLabel.text = "05:00pm"
+        self.clockLabel.font = UIFont(name: "Avenir", size: 20.0)
         self.clockLabel.sizeToFit()
-        self.clockLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
         let originX_clockLabel = sizeX + (view_width - sizeX)/2.0 - self.clockLabel.bounds.width/2.0
-        let originY_clockLabel = originY_signInAndOutTextLabel + self.clockLabel.bounds.height + 5
+        let originY_clockLabel = originY_hourImage - self.signInAndOutTextLabel.bounds.size.height*2
         self.clockLabel.textColor = UIColor(red:0.58, green:0.65, blue:0.65, alpha:1.0)
         self.clockLabel.frame = CGRect(origin: CGPoint(x: originX_clockLabel, y: originY_clockLabel), size: self.clockLabel.bounds.size)
         self.clockLabel.alpha = 0.0
@@ -217,7 +229,6 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             
             if metadataObj.stringValue != nil {
                 self.qrCodeFrameView?.frame = barCodeObject.bounds;
-                print(metadataObj.stringValue)
                 let hud = MBProgressHUD.showAdded(to: self.viewForCamera, animated: true)
                 hud.label.text = "Processing"
                 self.captureSession?.stopRunning()
@@ -233,7 +244,6 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 let parameters = ["qr_code_string": metadataObj.stringValue, "time_now": dateString]
                 let headers = ["Authorization": "JWT \(TimeClient.sharedInstance.AccessToken!)"]
                 TimeClient.sharedInstance.CheckInAndOutAPI("session-create", parameters: parameters as? [String : String], headers: headers, success: { (json) in
-                    print(json)
                     if let _ = json["is_active"] {
                         let session = Session(dictionary: json)
                         if session.isActive! {
@@ -260,12 +270,17 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                             self.moveImageWhenSignOut()
                             self.signInAndOutTextLabel.text = "Hi \(session.user!), you've signed out!"
                             self.signInAndOutTextLabel.sizeToFit()
+                            self.totalHourLabel.text = session.total_hour
+                            self.totalHourLabel.sizeToFit()
+                            self.clockLabel.text = "\(session.signOutTime!)"
+                            self.clockLabel.sizeToFit()
                             UIView.animate(withDuration: 2.0, animations: {
                                 self.signInAndOutTextLabel.alpha = 1.0
                                 self.clockLabel.alpha = 1.0
                                 self.staticLabel.alpha = 0.0
                                 self.successImage.alpha = 1.0
                                 self.hoursImage.alpha = 1.0
+                                self.totalHourLabel.alpha = 1.0
                                 }, completion: { (isComplete) in
                                     self.finishCapture()
                                     UIView.animate(withDuration: 2.0, animations: {
@@ -274,6 +289,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                                         self.staticLabel.alpha = 1.0
                                         self.successImage.alpha = 0.0
                                         self.hoursImage.alpha = 0.0
+                                        self.totalHourLabel.alpha = 0.0
                                     })
                             })
                             self.finishCapture()
@@ -292,10 +308,11 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     func logoutButtonClicked() {
+        let ngc = self.navigationController
         let alert = UIAlertController(title: "Sign out?", message: "Are you sure that you want to sign out?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
         let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default) { (action) in
-            self.navigationController?.popToRootViewController(animated: true)
+            let _ = ngc?.popToRootViewController(animated: true)
         }
         alert.addAction(confirmAction)
         self.present(alert, animated: true, completion: nil)
@@ -327,7 +344,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         let view_height = self.view.bounds.height
         let sizeX = view_width*4.5/10.0
         
-        let originX_successImage = sizeX + (view_width - sizeX)/2.0 - self.successImage.bounds.width
+        let originX_successImage = sizeX + (view_width - sizeX)/2.0 - self.successImage.bounds.width - 10
         let originY_successImage = view_height/2.0 - self.successImage.bounds.height/2.0
         self.successImage.frame = CGRect(origin: CGPoint(x: originX_successImage, y: originY_successImage), size: self.successImage.bounds.size)
     }

@@ -14,79 +14,6 @@
             </objects>
             <point key="canvasLocation" x="2547" y="-844"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="UXe-dq-bLv">
-            <objects>
-                <viewController storyboardIdentifier="firstIntro" id="u1V-p7-lYS" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0uH-pg-gHP"/>
-                        <viewControllerLayoutGuide type="bottom" id="spJ-aA-Ow1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="oT7-dt-fWf">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On your admin panel, start by adding your employees. You will have the option to print and email their Qr code cards." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa6-K1-Beg">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="357" id="KKx-1F-JAs"/>
-                                    <constraint firstAttribute="height" constant="100" id="T16-I2-AG2"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="ic_tablet_mac_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="gVy-Qv-Jks"/>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="gVy-Qv-Jks" firstAttribute="centerX" secondItem="oT7-dt-fWf" secondAttribute="centerX" id="Obo-kj-us1"/>
-                            <constraint firstItem="Xa6-K1-Beg" firstAttribute="centerY" secondItem="oT7-dt-fWf" secondAttribute="centerY" constant="56.5" id="U7K-X7-7vP"/>
-                            <constraint firstItem="Xa6-K1-Beg" firstAttribute="centerX" secondItem="oT7-dt-fWf" secondAttribute="centerX" id="nKj-Cr-Qd1"/>
-                            <constraint firstItem="gVy-Qv-Jks" firstAttribute="centerY" secondItem="oT7-dt-fWf" secondAttribute="centerY" constant="-30" id="r4w-bC-nJO"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="G0C-xs-KhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1432.5337331334333" y="-1682.4000000000001"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="NOD-cO-oyk">
-            <objects>
-                <viewController storyboardIdentifier="secondIntro" id="Ru0-Ed-lvP" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hea-Ll-M7s"/>
-                        <viewControllerLayoutGuide type="bottom" id="U5c-NI-0sJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="A6W-ab-Wq7">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MG7-C3-tmp">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="RT8-XC-GOR"/>
-                                    <constraint firstAttribute="width" constant="357" id="rMC-lk-jcp"/>
-                                </constraints>
-                                <string key="text">Each employee is assigned a specific Qr code. To sign in or out, your employee should scan their Qr code using your device camera.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="ic_crop_free_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="qhB-gH-A0f"/>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="MG7-C3-tmp" firstAttribute="centerY" secondItem="A6W-ab-Wq7" secondAttribute="centerY" constant="56.5" id="5r3-d3-T5J"/>
-                            <constraint firstItem="qhB-gH-A0f" firstAttribute="centerY" secondItem="A6W-ab-Wq7" secondAttribute="centerY" constant="-30" id="cgf-IY-6Ia"/>
-                            <constraint firstItem="MG7-C3-tmp" firstAttribute="centerX" secondItem="A6W-ab-Wq7" secondAttribute="centerX" id="tcg-aW-jir"/>
-                            <constraint firstItem="qhB-gH-A0f" firstAttribute="centerX" secondItem="A6W-ab-Wq7" secondAttribute="centerX" id="zNG-RH-Jji"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hf8-Eg-ubL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2066.7166416791606" y="-1682.4000000000001"/>
-        </scene>
         <!--Log In View Controller-->
         <scene sceneID="KUE-Wx-Ylw">
             <objects>
@@ -99,10 +26,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBD-iC-Kj9">
-                                <frame key="frameInset" width="667" height="375"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bBD-iC-Kj9"/>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6S-25-ie9">
                                 <frame key="frameInset" minX="213" minY="124" width="240" height="126"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,6 +61,12 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="W4T-Bo-5MW" firstAttribute="top" secondItem="bBD-iC-Kj9" secondAttribute="bottom" id="RmH-jf-xBB"/>
+                            <constraint firstItem="bBD-iC-Kj9" firstAttribute="leading" secondItem="iF8-e5-im4" secondAttribute="leading" id="YeH-e9-cuX"/>
+                            <constraint firstAttribute="trailing" secondItem="bBD-iC-Kj9" secondAttribute="trailing" id="j3T-Ff-B4N"/>
+                            <constraint firstItem="bBD-iC-Kj9" firstAttribute="top" secondItem="iF8-e5-im4" secondAttribute="top" id="tvp-yj-eN6"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WkK-6A-a87"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -155,58 +85,6 @@
             </objects>
             <point key="canvasLocation" x="971.06446776611699" y="-141.59999999999999"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="k6T-oY-8bs">
-            <objects>
-                <viewController storyboardIdentifier="thirdIntro" id="vuT-R9-Z2q" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="O8R-0M-osB"/>
-                        <viewControllerLayoutGuide type="bottom" id="A5j-XM-89l"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZSQ-qq-mjz">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="time_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="oKs-Zn-5Bq"/>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On your admin panel, your can track attendance and earnings for each specific employee." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRl-FL-OK7">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="357" id="7wq-8H-Ykv"/>
-                                    <constraint firstAttribute="height" constant="100" id="F12-rM-FCE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANq-j3-sre">
-                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="9PG-Bm-dnt"/>
-                                    <constraint firstAttribute="height" constant="30" id="SFw-Gj-dL2"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="366" id="bWr-Ph-WM6"/>
-                                    <constraint firstAttribute="width" constant="366" id="qsH-ss-6W5"/>
-                                </constraints>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Next"/>
-                                <connections>
-                                    <segue destination="2aX-lF-SfN" kind="show" id="dvY-ro-KOK"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="A5j-XM-89l" firstAttribute="top" secondItem="ANq-j3-sre" secondAttribute="bottom" constant="26" id="IEd-Hi-4b9"/>
-                            <constraint firstItem="MRl-FL-OK7" firstAttribute="centerX" secondItem="ZSQ-qq-mjz" secondAttribute="centerX" id="IPS-jf-Dxr"/>
-                            <constraint firstItem="oKs-Zn-5Bq" firstAttribute="centerX" secondItem="ZSQ-qq-mjz" secondAttribute="centerX" id="REu-d1-ohj"/>
-                            <constraint firstItem="ANq-j3-sre" firstAttribute="centerX" secondItem="ZSQ-qq-mjz" secondAttribute="centerX" id="dMQ-5L-BDc"/>
-                            <constraint firstItem="MRl-FL-OK7" firstAttribute="centerY" secondItem="ZSQ-qq-mjz" secondAttribute="centerY" constant="56.5" id="duV-7H-dgf"/>
-                            <constraint firstItem="oKs-Zn-5Bq" firstAttribute="centerY" secondItem="ZSQ-qq-mjz" secondAttribute="centerY" constant="-30" id="sWN-zR-bMI"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nLJ-ON-0fj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2705" y="-1689"/>
-        </scene>
         <!--Intro Container View Controller-->
         <scene sceneID="Pu5-nI-Jx6">
             <objects>
@@ -219,25 +97,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bad-tg-k0h">
-                                <frame key="frameInset" height="375" maxY="-1"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="D4N-Ro-b6t" kind="embed" id="LFV-VK-VCO"/>
-                                </connections>
-                            </containerView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="oMs-Pa-IN7">
-                                <frame key="frameInset" minX="314" minY="59" width="39" height="37"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="oMs-Pa-IN7">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="39" id="Irg-uU-9Pg"/>
                                     <constraint firstAttribute="height" constant="37" id="Zju-Bj-eAs"/>
                                 </constraints>
                             </pageControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bad-tg-k0h">
+                                <connections>
+                                    <segue destination="D4N-Ro-b6t" kind="embed" id="LFV-VK-VCO"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Bad-tg-k0h" firstAttribute="leading" secondItem="zjP-l2-k79" secondAttribute="leading" id="2TN-tx-1H1"/>
                             <constraint firstItem="oMs-Pa-IN7" firstAttribute="centerX" secondItem="zjP-l2-k79" secondAttribute="centerX" id="Nb8-ZH-Rx9"/>
-                            <constraint firstItem="oMs-Pa-IN7" firstAttribute="top" secondItem="0HP-qz-aNe" secondAttribute="bottom" constant="50" id="sYg-DS-NNv"/>
+                            <constraint firstItem="Bad-tg-k0h" firstAttribute="top" secondItem="zjP-l2-k79" secondAttribute="top" id="Wsb-gN-88u"/>
+                            <constraint firstAttribute="trailing" secondItem="Bad-tg-k0h" secondAttribute="trailing" id="esf-0b-dPW"/>
+                            <constraint firstItem="fWv-yF-qvn" firstAttribute="top" secondItem="Bad-tg-k0h" secondAttribute="bottom" id="sWA-bN-gw2"/>
+                            <constraint firstItem="oMs-Pa-IN7" firstAttribute="top" secondItem="0HP-qz-aNe" secondAttribute="bottom" constant="28" id="sYg-DS-NNv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -252,7 +131,7 @@
         <!--Home View Controller-->
         <scene sceneID="eMJ-PZ-M8P">
             <objects>
-                <viewController id="2aX-lF-SfN" customClass="HomeViewController" customModule="timeApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanView" id="2aX-lF-SfN" customClass="HomeViewController" customModule="timeApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rNg-uY-XOP"/>
                         <viewControllerLayoutGuide type="bottom" id="sUb-jb-tlt"/>
@@ -303,7 +182,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours: 3 Hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0f-bV-dcG">
-                                <frame key="frameInset" minX="522" minY="209" width="116" height="21"/>
+                                <frame key="frameInset" minX="512" minY="177" width="116" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -335,7 +214,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ZiB-QL-o8J">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rJR-4U-fqq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainNavContrl" automaticallyAdjustsScrollViewInsets="NO" id="rJR-4U-fqq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="t03-VH-ilz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -351,12 +230,4 @@
             <point key="canvasLocation" x="345" y="-140"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ic_crop_free_48pt" width="48" height="48"/>
-        <image name="ic_tablet_mac_48pt" width="48" height="48"/>
-        <image name="time_48pt" width="48" height="48"/>
-    </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="dvY-ro-KOK"/>
-    </inferredMetricsTieBreakers>
 </document>

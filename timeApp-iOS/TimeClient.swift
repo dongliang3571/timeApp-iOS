@@ -51,7 +51,6 @@ class TimeClient: NSObject {
                         self.AccessToken = json["token"] as? String
                         self.keychain["AccessToken"] = self.AccessToken
                         success()
-                        print("after success()")
                     case 400...499:
                         print("JSON: \(json)")
                         print("Request error")

@@ -38,6 +38,12 @@ class Session: NSObject {
     }
     var team: String?
     var total_minutes: Float?
+    var total_hour: String? {
+        get {
+            let hour = self.total_minutes!/60.0
+            return String(format: "%.1fHours", arguments: [hour])
+        }
+    }
     var user: String?
     
     init(dictionary: NSDictionary) {

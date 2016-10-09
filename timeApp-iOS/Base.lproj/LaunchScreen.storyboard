@@ -15,14 +15,26 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group" translatesAutoresizingMaskIntoConstraints="NO" id="buM-kX-r9E"/>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="buM-kX-r9E" secondAttribute="trailing" id="Mkf-xx-RZE"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="buM-kX-r9E" secondAttribute="bottom" id="RyQ-aN-9qu"/>
+                            <constraint firstItem="buM-kX-r9E" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="cAt-4m-ox0"/>
+                            <constraint firstItem="buM-kX-r9E" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="z8C-2F-ss6"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.816901408450704" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Group" width="748" height="463"/>
+    </resources>
 </document>

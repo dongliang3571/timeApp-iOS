@@ -32,7 +32,7 @@ class IntroViewController: UIPageViewController {
     }
     
     static func newOrderedViewController(_ order: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(order)Intro")
+        return EachIntroViewController(name: order)
     }
     
     /*
@@ -97,3 +97,4 @@ protocol IntroViewControllerDelegate: class {
     
     func IntroViewController(introPageViewController: IntroViewController, didUpdatePageIndex index: Int)
 }
+

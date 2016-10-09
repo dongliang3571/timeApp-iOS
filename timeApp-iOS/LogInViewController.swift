@@ -31,12 +31,7 @@ class LogInViewController: UIViewController {
     func UISetUp() {
         
         let view_width = self.view.bounds.width
-        let view_height = self.view.bounds.height
-        
         self.backgroundImage.image = UIImage(named: "login_bg")
-        
-        
-        
         let origin_loginView = CGPoint(x: self.view.bounds.width/2.0 - self.loginView.bounds.width/2.0, y: view.bounds.height/2.0 - self.loginView.bounds.height/2.0)
         self.loginView.frame.origin = origin_loginView
         self.loginView.backgroundColor = UIColor.white
@@ -76,7 +71,6 @@ class LogInViewController: UIViewController {
             if first == true {
                 self.performSegue(withIdentifier: "loginSegue", sender: self)
                 MBProgressHUD.hide(for: self.view, animated: true)
-                print("go to scan")
             } else {
                 self.performSegue(withIdentifier: "intro", sender: self)
                 MBProgressHUD.hide(for: self.view, animated: true)
@@ -84,7 +78,7 @@ class LogInViewController: UIViewController {
             }, failure: { (error1, error2) in
                 if let error1 = error1 {
                     print(error1)
-                    let alert = UIAlertController(title: "Error", message: "An unexpected error happened, try again later", preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Error", message: "An unexpected error happened, server might experience issues, try again later", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Try again", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                     MBProgressHUD.hide(for: self.view, animated: true)

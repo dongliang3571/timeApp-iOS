@@ -18,6 +18,7 @@
 		3B5C1FD81D442C0F002064D9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5C1FD71D442C0F002064D9 /* LogInViewController.swift */; };
 		3BC6319D1D49C88B00DE5623 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BC6319C1D49C88B00DE5623 /* Assets.xcassets */; };
 		3BD861CF1D47E2270003B763 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD861CE1D47E2270003B763 /* Session.swift */; };
+		3BF2AD1F1DA9B63B0088E9F9 /* EachIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF2AD1E1DA9B63B0088E9F9 /* EachIntroViewController.swift */; };
 		6E46B42B4035F132F9306D33 /* Pods_timeApp_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF060CFC04230ABD6DE4EDC /* Pods_timeApp_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		3B5C1FD71D442C0F002064D9 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		3BC6319C1D49C88B00DE5623 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BD861CE1D47E2270003B763 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		3BF2AD1E1DA9B63B0088E9F9 /* EachIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachIntroViewController.swift; sourceTree = "<group>"; };
 		6401581F28F7D9D51E97AD97 /* Pods-timeApp-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-timeApp-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-timeApp-iOS/Pods-timeApp-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				3B454D921D3FDDF900F13BF4 /* TimeClient.swift */,
 				3B5C1FD71D442C0F002064D9 /* LogInViewController.swift */,
 				3BC6319C1D49C88B00DE5623 /* Assets.xcassets */,
+				3BF2AD1E1DA9B63B0088E9F9 /* EachIntroViewController.swift */,
 			);
 			path = "timeApp-iOS";
 			sourceTree = "<group>";
@@ -144,7 +147,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = kanic;
 				TargetAttributes = {
 					3B454D7A1D3F1C8500F13BF4 = {
@@ -240,6 +243,7 @@
 			files = (
 				3B31059D1DA1D5DF00EC8EFD /* IntroContainerViewController.swift in Sources */,
 				3B454D7F1D3F1C8500F13BF4 /* AppDelegate.swift in Sources */,
+				3BF2AD1F1DA9B63B0088E9F9 /* EachIntroViewController.swift in Sources */,
 				3B454D931D3FDDF900F13BF4 /* TimeClient.swift in Sources */,
 				3BD861CF1D47E2270003B763 /* Session.swift in Sources */,
 				3B31059F1DA2001500EC8EFD /* User.swift in Sources */,
@@ -285,8 +289,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -308,7 +314,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -330,8 +336,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -347,9 +355,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -358,6 +367,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6401581F28F7D9D51E97AD97 /* Pods-timeApp-iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -376,6 +386,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 082965A789F0C4689B273555 /* Pods-timeApp-iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
