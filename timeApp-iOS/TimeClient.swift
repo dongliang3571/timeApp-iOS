@@ -17,7 +17,7 @@ class TimeClient: NSObject {
     
     var baseURL: URL?
     var AccessToken: String?
-    static let sharedInstance = TimeClient(baseURL: URL(string: "http://192.168.1.3:8000/api/")!)
+    static let sharedInstance = TimeClient(baseURL: URL(string: "https://time-app.herokuapp.com/api/")!)
     
     init(baseURL: URL) {
         self.baseURL = baseURL

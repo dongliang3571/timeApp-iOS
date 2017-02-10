@@ -47,7 +47,7 @@ class Session: NSObject {
     var user: String?
     
     init(dictionary: NSDictionary) {
-        if dictionary["is_active"] as! Int == 0 {
+        if dictionary["is_active"] as! Bool == false {
             self.isActive = false
         } else {
             self.isActive = true
